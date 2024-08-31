@@ -5,6 +5,7 @@ from functools import cached_property, lru_cache
 from typing import (
     TYPE_CHECKING,
     Any,
+    AsyncGenerator,
     Dict,
     Iterable,
     List,
@@ -331,7 +332,7 @@ class Schema(BaseSchema):
         root_value: Optional[Any] = None,
         operation_name: Optional[str] = None,
         allowed_operation_types: Optional[Iterable[OperationType]] = None,
-    ) -> ExecutionResult:
+    ) -> Union[ExecutionResult, AsyncGenerator[ExecutionResult, None]]:
         if allowed_operation_types is None:
             allowed_operation_types = DEFAULT_ALLOWED_OPERATION_TYPES
 
